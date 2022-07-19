@@ -1,2 +1,2 @@
-# CoderHouse-Javascrip
+# CoderHouse-Javascript
 Curso de JacaScript
