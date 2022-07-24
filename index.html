@@ -1,12 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style="text-align: left;">
+    <h1 id="facturacion">Facturación</h1>
+    <h3 id="titulo1">Primeros 2 clientes (desc 30%):</h1>
+        <div id="p1"></div>
+    <h3 id="titulo2">Del 3ro al 4to cliente (desc 20%):</h1>
+        <div id="p2"></div>
+    <h3 id="titulo3">Del 5to al 6to cliente: (desc 10%)</h1>
+        <div id="p3"></div>
+    <h3 id="titulo4">Mas de 7 clientes: (desc 0%)</h1>
+        <div id="p4"></div>
+    <h2 id="totalfactura" style="font-style: italic;">Total ventas:</h4>
+
+    <button id="btn" onclick="cargaDatos()">Cargar Datos</button>
     <script src="javascript.js"></script>
 </body>
 </html>
