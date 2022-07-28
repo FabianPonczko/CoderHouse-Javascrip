@@ -1,157 +1,94 @@
 
-/*
-ARRAYS
-    Simulación de venta de productos con descuentos dependiendo de orden de llegada
- 
-
-let nombre 
-let precioProducto = 0
-let desc30 = 30
-let desc20 = 20
-let desc10 = 10
-let contador = 0
-let acu1=0
-let acu2=0
-let acu3=0
-let acu4=0
-let salir
-
-//Precio con descuento
-const precioConDesc = (precio,desc) => precio - (precio * desc)/100 
-
-//Suma de precio con descuento
-const subTotal = (a,acu) => acu += a
-
-//Total ventas
-const total = (acu1,acu2,acu3,acu4) => acu1+acu2+acu3+acu4
-
-
-//carga datos de factura
-function cargaDatos(){
-    do{
-        //contador clientes
-        contador +=1
-        
-        //Ingreso clientes y precio de producto
-        do{
-            nombre = prompt("Nombre del cliente?")
-            precioProducto = parseFloat(prompt("Precio del producto?"))
-            if (nombre ==null || nombre =="" || precioProducto ==null || precioProducto =="" || isNaN(precioProducto)){
-                alert("Cliente ó precio incorrecto")
-            }
-        }while(!nombre || precioProducto < 1 || isNaN(precioProducto))
-
-        
-        //control de clientes para aplicar descuentos
-        if (contador <= 2){
-            document.getElementById("p1").innerHTML += `Factura Nº: ${contador}, Cliente: ${nombre.toUpperCase()}, precio del producto $${precioProducto}, descuento 30%, Total c/desc: $${parseFloat(precioConDesc(precioProducto,desc30)).toFixed(2)} <br/>` 
-            acu1 = (subTotal(precioConDesc(precioProducto,desc30),acu1))
-            console.log(acu1)
-        }else if(contador > 2 && contador <= 4){
-            document.getElementById("p2").innerHTML +=`Factura Nº: ${contador}, Cliente: ${nombre.toUpperCase()}, precio del producto $${precioProducto}, descuento 20%, Total c/desc: $${parseFloat(precioConDesc(precioProducto,desc20)).toFixed(2)} <br/>`
-            acu2 = (subTotal(precioConDesc(precioProducto,desc20),acu2))
-            console.log(acu2)
-        }else if (contador > 4 && contador <= 6){
-            document.getElementById("p3").innerHTML +=`Factura Nº: ${contador}, Cliente: ${nombre.toUpperCase()}, precio del producto $${precioProducto}, descuento 10%, Total c/desc: $${parseFloat(precioConDesc(precioProducto,desc10)).toFixed(2)} <br/>`
-            acu3 = (subTotal(precioConDesc(precioProducto,desc10),acu3))
-            console.log(acu3)
-        }else{
-            document.getElementById("p4").innerHTML +=`Factura Nº: ${contador}, Cliente: ${nombre.toUpperCase()}, precio del producto $${precioProducto}, sin descuento <br/>`
-            acu4 += precioProducto
-            console.log(acu4)
-        }
-
-        //Salir o continuar carga de datos
-        do{
-            salir = prompt("desea salir?").toLowerCase()
-            if (salir != "si" && salir != "no"){
-                alert(`Ingrese "si" para salir, "no" para continuar`)
-            }
-        }while(salir != "si" && salir != "no")
-        
-    }while(salir !="si")
-    
-    //creación de sub-totales
-    if (document.getElementById("p1").textContent != ""){
-        document.getElementById("p1").innerHTML +=` <br> Sub-Total: $${acu1.toFixed(2)}`    
-    }else{
-        document.getElementById("titulo1").hidden ="true"
-    }
-    if (document.getElementById("p2").textContent != ""){
-        document.getElementById("p2").innerHTML +=` <br> Sub-Total: $${acu2.toFixed(2)}`    
-    }else{
-        document.getElementById("titulo2").hidden = "true"
-    }
-    if (document.getElementById("p3").textContent != ""){
-        document.getElementById("p3").innerHTML +=` <br> Sub-Total: $${acu3.toFixed(2)}`    
-    }else{
-        document.getElementById("titulo3").hidden ="true"
-    }
-    if (document.getElementById("p4").textContent != ""){
-        document.getElementById("p4").innerHTML +=` <br> Sub-Total: $${acu4.toFixed(2)}`    
-    }else{
-        document.getElementById("titulo4").hidden ="true"
-    }
-    
-    //Oculto boton
-    document.getElementById("btn").hidden = "true"
-
-    //Total ventas
-    document.getElementById("totalfactura").innerHTML +=` $${total(acu1,acu2,acu3,acu4).toFixed(2)}`
-
-    
-}
+/*  Arrays, Objetos
+    Simulación carga de clientes de una financiera
 */
-let menu
-let clientes = []
+function cargaDatos(){
 
-class cliente {
-    constructor (nombre,direccion,numeroCuenta,saldo){
-        this.nombre = nombre
-        this.direccion = direccion
-        this.numeroCuemta = numeroCuenta
-        this.saldo = saldo
-    }
-    sumarSaldo (saldo){
-        this.saldo += saldo
-    }
-    restarSaldo (saldo){
-        this.saldo -= saldo
-    }
-
-}
-
-
-do{
-
-    menu = prompt(`            *** MENU *** 
-    1- Nuevo Cliente
-    2- Eliminar Cliente
-    3- Mostrar Cliente
-    4- Salir`)
     
+    let menu
+    let clientes = []
     
-    switch(menu){
-        case "1":
-            const cliente1 = new cliente (prompt("Cliente?"),prompt("Dirección?"),prompt("Cuenta?"),prompt("Saldo?"))
-            clientes.push(cliente1)
+    class cliente {
+        constructor (nombre,direccion,numeroCuenta,saldo){
+            this.nombre = nombre
+            this.direccion = direccion
+            this.numeroCuemta = numeroCuenta
+            this.saldo = saldo
+        }
+        //Sumar saldo de cliente
+        sumarSaldo (saldo){
+            this.saldo += saldo
+        }
+        //Restar saldo de cliente
+        restarSaldo (saldo){
+            if (this.saldo>=saldo){
+                this.saldo -= saldo
+            }else{
+                alert(`Saldo: ${this.saldo}) iposible realizar la operacion`)
+            }
+        }
+    }
+    
+    do{
+        //Menu principal elecciones de comandos
+        menu = prompt(`            *** MENU *** 
+        1- Nuevo Cliente
+        2- Eliminar Cliente
+        3- Mostrar Clientes
+        4- Sumar Saldo a cliente
+        5- Restar Saldo a cliente
+        6- Salir`)
+        
+        switch(menu){
+            //Carga de nuevos clientes
+            case "1":
+                const nuevoCliente = new cliente (prompt("Cliente?").toUpperCase(),prompt("Dirección?"),parseInt(prompt("Cuenta?")),parseFloat(prompt("Saldo?")))
+                clientes.push(nuevoCliente)
                 break
-        case "2":
-            let eliminar = prompt("Cliente?")
-            for (let elemento of clientes){
-                console.log(elemento)
-                console.log(elemento.nombre)
-                if (eliminar == elemento.nombre){
-                    alert(`cliente a eliminar`)
-                    clientes.splice(elemento,1)
+            //Eliminacion de cliente
+            case "2":
+                let eliminar = prompt("Cliente?").toUpperCase()
+                for (let ele = 0; ele<clientes.length ; ele++){
+                    if (clientes[ele].nombre == eliminar){
+                    alert(`se elimino cliente: ${clientes[ele].nombre}`)
+                    clientes.splice(ele,1)
+                    }
                 }
-            }4
             break
-        case "3":
-            console.table(clientes)
+            //Mostrar clientes con consola
+            case "3":
+                console.table(clientes)
             break
-        case "4":
-            break
+            //Sumar saldo a cliente
+            case "4":
+                let saldoScliente = prompt("Ingrese Cliente?")
+                let saldoSMonto = parseFloat(prompt("Saldo a sumar?"))
+                for (let ele = 0; ele<clientes.length ; ele++){
+                    if (clientes[ele].nombre == saldoScliente){
+                        clientes[ele].sumarSaldo(saldoSMonto)
+                    }
                 }
-    }while(menu !=4)
-                    
+            break
+            //Restar saldo a cliente
+            case "5":
+                let saldoRcliente = prompt("Ingrese Cliente?")
+                let saldoRMonto = parseFloat(prompt("Saldo a restar?"))
+                for (let ele = 0; ele<clientes.length ; ele++){
+                    if (clientes[ele].nombre == saldoRcliente){
+                        clientes[ele].restarSaldo(saldoRMonto)
+                    }
+                }
+                break
+            //Salida de programa
+            case "6":
+                for (let ele=0; ele < clientes.length;ele++){
+                    document.getElementById("cliente").innerHTML += `${clientes[ele].nombre} <br>` 
+                    document.getElementById("direccion").innerHTML += `${clientes[ele].direccion} <br>` 
+                    document.getElementById("cuenta").innerHTML += `${clientes[ele].numeroCuemta} <br>` 
+                    document.getElementById("saldo").innerHTML += `${clientes[ele].saldo} <br>` 
+                }
+                break
+        }
+    }while(menu !=6)
+            
+}

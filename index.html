@@ -6,19 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body style="text-align: left;">
-    <h1 id="facturacion">Facturación</h1>
-    <h3 id="titulo1">Primeros 2 clientes (desc 30%):</h1>
-        <div id="p1"></div>
-    <h3 id="titulo2">Del 3ro al 4to cliente (desc 20%):</h1>
-        <div id="p2"></div>
-    <h3 id="titulo3">Del 5to al 6to cliente: (desc 10%)</h1>
-        <div id="p3"></div>
-    <h3 id="titulo4">Mas de 7 clientes: (desc 0%)</h1>
-        <div id="p4"></div>
-    <h2 id="totalfactura" style="font-style: italic;">Total ventas:</h4>
+<body>
+    
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+    </style>
+
+    <h1>Clientes</h1>
+    
+    <table>
+        <tr>
+          <th>Cliente</th>
+          <th>Domicilio</th>
+          <th>Cuenta</th>
+          <th>Saldo</th>
+        </tr>
+        <tr>
+          <td id="cliente"></td>
+          <td id="direccion"></td>
+          <td id="cuenta"></td>
+          <td id ="saldo"></td>
+        </tr>
+        
+      </table>
+        
+    
 
     <button id="btn" onclick="cargaDatos()">Cargar Datos</button>
+    
     <script src="javascript.js"></script>
 </body>
 </html>
