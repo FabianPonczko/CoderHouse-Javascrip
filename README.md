@@ -1,2 +1,2 @@
 # CoderHouse-Javascript
-Curso de JavaScript
+Curso de JavaScript trabajando en arrays

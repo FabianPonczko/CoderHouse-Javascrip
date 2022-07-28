@@ -1,5 +1,6 @@
 
 /*
+ARRAYS
     Simulación de venta de productos con descuentos dependiendo de orden de llegada
 */ 
 
