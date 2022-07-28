@@ -2,7 +2,7 @@
 /*
 ARRAYS
     Simulación de venta de productos con descuentos dependiendo de orden de llegada
-*/ 
+ 
 
 let nombre 
 let precioProducto = 0
@@ -101,3 +101,57 @@ function cargaDatos(){
 
     
 }
+*/
+let menu
+let clientes = []
+
+class cliente {
+    constructor (nombre,direccion,numeroCuenta,saldo){
+        this.nombre = nombre
+        this.direccion = direccion
+        this.numeroCuemta = numeroCuenta
+        this.saldo = saldo
+    }
+    sumarSaldo (saldo){
+        this.saldo += saldo
+    }
+    restarSaldo (saldo){
+        this.saldo -= saldo
+    }
+
+}
+
+
+do{
+
+    menu = prompt(`            *** MENU *** 
+    1- Nuevo Cliente
+    2- Eliminar Cliente
+    3- Mostrar Cliente
+    4- Salir`)
+    
+    
+    switch(menu){
+        case "1":
+            const cliente1 = new cliente (prompt("Cliente?"),prompt("Dirección?"),prompt("Cuenta?"),prompt("Saldo?"))
+            clientes.push(cliente1)
+                break
+        case "2":
+            let eliminar = prompt("Cliente?")
+            for (let elemento of clientes){
+                console.log(elemento)
+                console.log(elemento.nombre)
+                if (eliminar == elemento.nombre){
+                    alert(`cliente a eliminar`)
+                    clientes.splice(elemento,1)
+                }
+            }4
+            break
+        case "3":
+            console.table(clientes)
+            break
+        case "4":
+            break
+                }
+    }while(menu !=4)
+                    
