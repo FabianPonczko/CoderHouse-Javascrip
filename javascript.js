@@ -24,7 +24,7 @@ function cargaDatos(){
             if (this.saldo>=saldo){
                 this.saldo -= saldo
             }else{
-                alert(`Saldo: ${this.saldo}) iposible realizar la operacion`)
+                alert(`Saldo: ${this.saldo} imposible realizar la operacion`)
             }
         }
     }
