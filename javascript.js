@@ -1,6 +1,7 @@
 
 /*  Arrays, Objetos
     Simulación carga de clientes de una financiera
+    primeraEntrega
 */
 function cargaDatos(){
 
