@@ -20,6 +20,7 @@
           text-align: left;
           padding: 8px;
         }
+        
     </style>
 
     <h1>Clientes</h1>
@@ -28,21 +29,24 @@
         <tr>
           <th>Cliente</th>
           <th>Domicilio</th>
+          <th>Localidad</th>
           <th>Cuenta</th>
           <th>Saldo</th>
         </tr>
         <tr>
           <td id="cliente"></td>
           <td id="direccion"></td>
+          <td id="localidad"></td>
           <td id="cuenta"></td>
           <td id ="saldo"></td>
         </tr>
         
       </table>
         
+      <div id="productos"></div>
     
+      <button id="btn" onclick="cargaDatos()">Menú Principal</button>
 
-    <button id="btn" onclick="cargaDatos()">Cargar Datos</button>
     
     <script src="javascript.js"></script>
 </body>
