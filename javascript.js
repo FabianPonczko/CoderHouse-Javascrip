@@ -1,6 +1,6 @@
 
 /* primera entrega
-    
+   
 */
 
 
@@ -113,8 +113,8 @@ function cargaDatos(){
                         return ele.id + 1
                     }
                 })
-                let nAleatorio = Math.round(Math.random()*100000);
-                const nuevoCliente = new Cliente (idMax ,prompt("Cliente?").toUpperCase(),prompt("Dirección?"),prompt("Localidad").toUpperCase(),nAleatorio,prompt("Saldo?"))
+                let numeroAleatorio = Math.round(Math.random()*100000);
+                const nuevoCliente = new Cliente (idMax ,prompt("Cliente?").toUpperCase(),prompt("Dirección?"),prompt("Localidad").toUpperCase(),numeroAleatorio,prompt("Saldo?"))
                 clientes.push(nuevoCliente)
                 mostrarClientes(clientes)
             break
@@ -131,7 +131,7 @@ function cargaDatos(){
                 mostrarClientes(clientes)
             break
             
-                //Mostrar clientes con consola
+                //Mostrar clientes con consolaS
             case "3":
                 console.table(clientes)
             break

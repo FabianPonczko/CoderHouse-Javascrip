@@ -1,2 +1,2 @@
 # CoderHouse-Javascript
-Curso de JavaScript trabajando en arrays
+Primer entrega con todo lo visto, funciones de order superior.
