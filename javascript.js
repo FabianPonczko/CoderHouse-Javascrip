@@ -5,7 +5,7 @@
 
 
 //clientes pre-cargados
-const clientesCargados = [
+let clientesCargados = [
   {
     id:1,
     nombre: "juan",
@@ -47,7 +47,7 @@ class Cliente {
         this.nombre = nombre
         this.direccion = direccion
         this.localidad = localidad
-        this.numeroCuemta = numeroCuenta
+        this.numeroCuenta = numeroCuenta
         this.saldo = saldo
     }
     //Sumar saldo de cliente
@@ -64,14 +64,22 @@ class Cliente {
     }
     
 }
-const clientes = clientesCargados.map(ele => new Cliente(
-    ele.id,
-    ele.nombre.toUpperCase(),
-    ele.direccion,
-    ele.localidad.toUpperCase(),
-    ele.numeroCuenta,
-    ele.saldo,
-))
+
+let backupClientes = localStorage.getItem("clientes")
+console.log(JSON.parse(backupClientes))
+if (backupClientes){
+    clientesCargados = JSON.parse(backupClientes)
+}
+
+    const clientes = clientesCargados.map(ele => new Cliente(
+        ele.id,
+        ele.nombre.toUpperCase(),
+        ele.direccion,
+        ele.localidad.toUpperCase(),
+        ele.numeroCuenta,
+        ele.saldo,
+        ))
+        
 
 //Muestra en el DOM los Clientes
 function mostrarClientes(clientes){
@@ -84,10 +92,14 @@ function mostrarClientes(clientes){
             document.getElementById("cliente").innerHTML += `${clientes[ele].nombre} <br>` 
             document.getElementById("direccion").innerHTML += `${clientes[ele].direccion} <br>` 
             document.getElementById("localidad").innerHTML += `${clientes[ele].localidad} <br>` 
-            document.getElementById("cuenta").innerHTML += `${clientes[ele].numeroCuemta} <br>` 
+            document.getElementById("cuenta").innerHTML += `${clientes[ele].numeroCuenta} <br>` 
             document.getElementById("saldo").innerHTML += `${clientes[ele].saldo} <br>` 
+            
        }
 }
+
+
+
 mostrarClientes(clientes)
 
 
@@ -100,7 +112,7 @@ function cargaDatos(){
         4- Sumar Saldo a cliente
         5- Restar Saldo a cliente
         6- Filtrar cliente por Localidad
-        7- Salir`)
+        7- Salvar y Salir`)
         
         switch(menu){
                //Carga de nuevos clientes
@@ -162,7 +174,25 @@ function cargaDatos(){
                 
                 //Filtra clientes por localidad y muestra resultado en el DOM
             case "6":
-                let localidadBuscada = prompt("Localidad?", "todas").toUpperCase()
+
+                const locEncontradas = {}
+                for (loc of clientes){
+                    if (locEncontradas[loc.localidad] >=1 ){
+                        locEncontradas[loc.localidad] +=1
+                    }else{
+                        locEncontradas[loc.localidad] =1
+                    }
+
+                }
+                //console.log(JSON.stringify(locEncontradas))
+
+                let encontradas =[]
+                
+                for (clave in locEncontradas){
+                    encontradas.push(clave)
+                }
+            
+                let localidadBuscada = prompt(`Localidad? \n ${encontradas}` , "todas").toUpperCase()
                 let clientesXlocalidad = clientes.filter((ele)=>ele.localidad == localidadBuscada)
                 if (localidadBuscada != "TODAS"){
                     mostrarClientes(clientesXlocalidad)
@@ -173,7 +203,9 @@ function cargaDatos(){
                 
                 //Salida de programa
             case "7":
-                mostrarClientes()                
+                mostrarClientes(clientes)
+                localStorage.setItem("clientes",JSON.stringify(clientes))  
+                     
             break
         }
    
