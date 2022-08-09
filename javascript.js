@@ -173,7 +173,7 @@ function cargaDatos(){
                 
                 //Salida de programa
             case "7":
-                mostrarClientes()                
+                mostrarClientes(clientes)                
             break
         }
    
