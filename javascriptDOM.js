@@ -27,12 +27,36 @@ const clientesCargados = [
     },
     {
       id:4,
-      nombre: "maria",
-      direccion: "mar del plata 685",
+      nombre: "maria alejandra",
+      direccion: "ayacucho 155",
       localidad: "cordoba",
       numeroCuenta: 67434,
       saldo: 5500
     },
+    {
+        id:5,
+        nombre: "maria",
+        direccion: "mar del plata 685",
+        localidad: "cordoba",
+        numeroCuenta: 67434,
+        saldo: 5500
+      },
+      {
+        id:6,
+        nombre: "lucas",
+        direccion: "puayrredon 200",
+        localidad: "cordoba",
+        numeroCuenta: 67434,
+        saldo: 5500
+      },
+      {
+        id:7,
+        nombre: "fabian",
+        direccion: "san luis 500",
+        localidad: "cordoba",
+        numeroCuenta: 67434,
+        saldo: 5500
+      },
   ]
   //fin clientes pre-cargados
   
@@ -42,13 +66,15 @@ const clientesCargados = [
           this.nombre = nombre
           this.direccion = direccion
           this.localidad = localidad
-          this.numeroCuemta = numeroCuenta
+          this.numeroCuenta = numeroCuenta
           this.saldo = saldo
       }
+      
       //Sumar saldo de cliente
       sumarSaldo (saldo){
           this.saldo += saldo
       }
+      
       //Restar saldo de cliente
       restarSaldo (saldo){
           if (this.saldo>=saldo){
@@ -66,36 +92,47 @@ const clientesCargados = [
       ele.localidad.toUpperCase(),
       ele.numeroCuenta,
       ele.saldo,
-  ))
-    
-    
-    const tbody = document.getElementById("tbody")
-
+      ))
+      
+      //Accediendo a los elementos id
+      const tbody = document.getElementById("tbody")        
+      const inputText = document.getElementById("inputText")
+      const btnVolver = document.getElementById("btnVolver")
+      const ocultar  = document.getElementById("ocultar")
+      const cargadatos = document.getElementById("cargadatos")
+  
+    //Muestra inicial clientes de base de datos
     mostrarClientes()
-   function mostrarClientes(){
-    cargadatos.style.display=`none`
-    ocultar.style.display = ``
+   
+    //Funcion muestra clientes
+    function mostrarClientes(){
 
+        //ocultando/mostrando btn
+        cargadatos.style.display=`none`
+        inputText.style.display=`none`
+        btnVolver.style.display=`none`
+        ocultar.style.display = ``
 
-    tbody.innerHTML = `
-    <tr>
-    <th scope="row"></th>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    </tr>
-    `
-       clientes.forEach((info)=>
-       {
+        //creando tabla
+        tbody.innerHTML = `
+            <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+            `
+        //llenando tabla
+        clientes.forEach((info)=>{
            tbody.innerHTML += `
            <tr>
            <th scope="row">${info.id}</th>
            <td>${info.nombre}</td>
            <td>${info.direccion}</td>
            <td>${info.localidad}</td>
-           <td>${info.numeroCuemta}</td>
+           <td>${info.numeroCuenta}</td>
            <td>${info.saldo}</td>
            </tr>
            `
@@ -103,21 +140,21 @@ const clientesCargados = [
       
     }
     
+    //Funcion crea formulario de nuevo cliente
     function nuevoCliente(){
 
-        const ocultar  = document.getElementById("ocultar")
         ocultar.style.display=`none`        
 
-        const cargadatos = document.getElementById("cargadatos")
         cargadatos.style.display=``        
         
+        //creando formulario de carga de cliente
         cargadatos.innerHTML = (` 
         <div class="mt-4 mb-3 ms-3">
         <label for="formGroupExampleInput" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" placeholder="ingrese nombre">
         </div>
         <div class="mb-3 ms-3">
-        <label for="formGroupExampleInput2" class="form-label">Direccion</label>
+        <label for="formGroupExampleInput2" class="form-label">Dirección</label>
         <input type="text" class="form-control" id="direccion" placeholder="ingrese dirección">
         </div>
         <div class="mb-3 ms-3">
@@ -125,8 +162,8 @@ const clientesCargados = [
         <input type="text" class="form-control" id="localidad" placeholder="ingrese localidad">
         </div>
         <div class="mb-3 ms-3">
-        <label for="formGroupExampleInput5" class="form-label">saldo</label>
-        <input type="text" class="form-control" id="saldo" placeholder="ingrese localidad">
+        <label for="formGroupExampleInput5" class="form-label">Saldo</label>
+        <input type="text" class="form-control" id="saldo" placeholder="ingrese monto">
         </div>
 
 
@@ -136,6 +173,7 @@ const clientesCargados = [
         `)
     }
 
+    //Funcion carga el nuevo cliente
     function cargaDatos(){
         
         const nombre = document.getElementById("nombre")
@@ -153,20 +191,40 @@ const clientesCargados = [
         let numeroAleatorio = Math.round(Math.random()*100000);
         const nuevoCliente = new Cliente (idMax ,nombre.value.toUpperCase(),direccion.value,localidad.value.toUpperCase(),numeroAleatorio,saldo.value)
         clientes.push(nuevoCliente)
-        cargadatos.style.display=`none`
         mostrarClientes()
     }
 
-    function eliminarCliente(){
-
-        `
-        <select id="form-select" aria-label="Default select example">
-        <option selected>Seleccione cliente a eliminar</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        </select>
+   
+    //Funcion filtrar cliente por nombre
+    function filtrarCliente(){
         
-        `
+        inputText.value=``
+        inputText.style.display=``
+        btnVolver.style.display=``
 
+        inputText.addEventListener("input",()=>{
+            console.log(inputText.value)
+            
+            const encontrado = clientes.filter((ele)=>ele.nombre.includes(inputText.value.toUpperCase()))
+            console.log(encontrado)
+           
+            
+           tbody.innerHTML = ``
+           //actualizando tabla
+           encontrado.forEach((info)=>{
+                
+                tbody.innerHTML += `
+                <tr>
+                <th scope="row">${info.id}</th>
+                <td>${info.nombre}</td>
+                <td>${info.direccion}</td>
+                <td>${info.localidad}</td>
+                <td>${info.numeroCuenta}</td>
+                <td>${info.saldo}</td>
+                </tr>
+                `
+            })
+           
+        })
+      
     }

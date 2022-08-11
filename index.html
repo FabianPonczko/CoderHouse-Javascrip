@@ -8,22 +8,19 @@
     <title>Document</title>
 </head>
 <body>
-    
-    
+   
 
   <nav class="navbar bg-light">
     <form class="container-fluid justify-content-start">
-      <button class="btn btn-outline-success me-2" onclick="nuevoCliente()" type="button">Nuevo Cliente</button>
-      <button class="btn btn-outline-success me-2" type="button">Eliminar Cliente</button>
-      <button class="btn btn-outline-success me-2" type="button">Ingreso de saldo</button>
-      <button class="btn btn-outline-success me-2" type="button">Egreso de saldo</button>
-      <button class="btn btn-sm btn-outline-secondary" type="button">Filtrar Cliente</button>
+    <button class="btn btn-outline-success me-2" type="button" onclick="nuevoCliente()">Nuevo Cliente</button>
+    <button class="btn btn-outline-success me-2" type="button" onclick="filtrarCliente()">Filtrar Cliente</button>
     </form>
   </nav>
   
   <div id="ocultar">
 
-    
+    <input placeholder="Ingrese nombre" type="text" id="inputText" style ="margin: 15px;">
+    <button id="btnVolver" type="button" onclick="mostrarClientes()">Volver</button>
     
     <table class="table table-striped">
       <thead class="table-dark">
@@ -46,11 +43,6 @@
   <div id="cargadatos"></div>
   
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-      <!--
-        <button id="btn" onclick="cargaDatos()">Menú Principal</button>
-      <script src="javascript.js"></script>
-    -->
-    
-    <script src="javascriptDOM.js"></script>
+      <script src="javascriptDOM.js"></script>
 </body>
 </html>
