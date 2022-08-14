@@ -51,9 +51,11 @@ let clientesCargados = [
   //recuperar clientes del localstorage y sino carga los pre-cargados
   const objetosRecuperados  = localStorage.getItem("storageClientes")
   
-  if (JSON.parse(objetosRecuperados)[0] !=undefined ){
-    clientesCargados = JSON.parse(objetosRecuperados)
-  }
+  if (objetosRecuperados){
+      if (JSON.parse(objetosRecuperados)[0] !=undefined ){
+          clientesCargados = JSON.parse(objetosRecuperados)
+        }
+    }
   
   const clientes = clientesCargados.map(ele => new Cliente(
       ele.id,
