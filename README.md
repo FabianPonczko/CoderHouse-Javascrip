@@ -1,2 +1,2 @@
 # CoderHouse-Javascript
-Interacuando con HTML desde el laburo
+Interacuando con HTML, eventos y localstorage
